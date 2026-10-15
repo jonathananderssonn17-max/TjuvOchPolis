@@ -1,4 +1,6 @@
-﻿namespace TjuvOchPolis
+﻿using System.Security.Cryptography.X509Certificates;
+
+namespace TjuvOchPolis
 {
     internal class Program
     {
@@ -57,6 +59,16 @@
                 Citizen name = new Citizen(names[rnd], x, y, xDir, yDir);
                 citizens.Add(name);
             }
+            foreach(Citizen citizen in citizens)
+            {
+                Console.WriteLine(citizen.Name + ":" + citizen.X + ":" + citizen.Y + ":" );
+              foreach(Item item in citizen.Tillhörigheter)
+                {
+                    Console.WriteLine(item.Name);
+                } 
+            }
+            
         }
+
     }
 }
