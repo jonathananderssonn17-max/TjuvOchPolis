@@ -12,8 +12,10 @@ namespace TjuvOchPolis
         public int Xdirection { get; set; }
         public int Ydirection { get; set; }
         public List<Item> Inventory { get; set;}
+        public char Symbol { get; set; }
+        public ConsoleColor Color { get; set; }
 
-        public Person(string name, int x, int y, int xdirection, int ydirection)
+        public Person(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color)
         {
             Name = name;
             X = x;
@@ -21,6 +23,8 @@ namespace TjuvOchPolis
             Xdirection = xdirection;
             Ydirection = ydirection;
             Inventory = new List <Item>();
+            Symbol = symbol;
+            Color = color;
         }
 
     }
@@ -28,18 +32,18 @@ namespace TjuvOchPolis
         
     {
         public List<Item> Stöldgods { get; set; } = new List<Item>();
-        public Thief(string name, int x, int y, int xdirection, int ydirection) : base(name, x, y, xdirection, ydirection)
+        public Thief(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color) : base(name, x, y, xdirection, ydirection, symbol, color)
         {
-
+            
         }
     }
     class Police : Person
        
     {
         public List<Item> Beslagtaget { get; set; } = new List<Item>();
-        public Police(string name, int x, int y, int xdirection, int ydirection) : base(name, x, y, xdirection, ydirection)
+        public Police(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color) : base(name, x, y, xdirection, ydirection, symbol, color)
         {
-
+            
         }
 
     }
@@ -47,9 +51,10 @@ namespace TjuvOchPolis
     {
         public List<Item> Tillhörigheter { get; set; } = new List<Item>();
        
-        public Citizen(string name, int x, int y, int xdirection, int ydirection) : base(name, x, y, xdirection, ydirection)
+        public Citizen(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color) : base(name, x, y, xdirection, ydirection, symbol, color)
 
         {
+            
             Tillhörigheter.Add(new Item("keys"));
             Tillhörigheter.Add(new Item("wallet"));
             Tillhörigheter.Add(new Item("mobile"));
