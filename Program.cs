@@ -12,9 +12,9 @@ namespace TjuvOchPolis
 
             string[] names =
             {
-            "John", "Jane", "Joe", 
-            "Alice", "Bob", "Charlie", 
-            "Anna", "David", "Eve", 
+            "John", "Jane", "Joe",
+            "Alice", "Bob", "Charlie",
+            "Anna", "David", "Eve",
             "Sofia", "Grace", "Henry",
             "Liam", "Olivia", "Noah",
             "Emma", "Ava", "Isabella",
@@ -59,16 +59,42 @@ namespace TjuvOchPolis
                 Citizen name = new Citizen(names[rnd], x, y, xDir, yDir);
                 citizens.Add(name);
             }
-            foreach(Citizen citizen in citizens)
+            foreach (Citizen citizen in citizens)
             {
-                Console.WriteLine(citizen.Name + ":" + citizen.X + ":" + citizen.Y + ":" );
-              foreach(Item item in citizen.Tillhörigheter)
+                Console.WriteLine(citizen.Name + ":" + citizen.X + ":" + citizen.Y + ":");
+                foreach (Item item in citizen.Tillhörigheter)
                 {
                     Console.WriteLine(item.Name);
-                } 
+                }
             }
-            
-        }
+            Console.WriteLine();
 
-    }
+            char[,] city = new char[25, 50];
+
+            for (int i = 0; i < city.GetLength(0); i++)
+            {
+
+                city[i, 49] = '=';
+                Console.Write(city[i, 49]);
+
+
+                for (int y = 0; y < city.GetLength(1); y++)
+                {
+                  
+                 //   city[i,y]= '.';
+                  //  Console.Write(city[i, y]);
+
+                }
+                Console.WriteLine() ;
+            }
+
+
+
+       }
+       
+       }
+
 }
+
+
+
