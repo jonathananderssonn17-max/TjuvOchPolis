@@ -29,10 +29,14 @@ namespace TjuvOchPolis
 
                 // metod för att stöta på en annan person
                 City.CheckMeetings(thiefs, polices, citizens);
-
-                Thread.Sleep(300);
+                Thread.Sleep(1000);
                 Console.Clear();
+                City.ShowStatus(polices, citizens, thiefs);
+
+               
+
             }
+
         }
     }
 }

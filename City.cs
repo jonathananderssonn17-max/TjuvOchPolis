@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
 namespace TjuvOchPolis
@@ -189,7 +190,16 @@ namespace TjuvOchPolis
                     //    Console.ReadKey();
                     //}
                 }
+
             }
+        }
+        public static void ShowStatus(List<Police> polices, List<Citizen> citizens, List< Thief> thiefs)
+        {
+            Console.WriteLine("STATUS");
+            Console.WriteLine("Antal tjuvar: " + thiefs.Count);
+            Console.WriteLine("Antal polisar: " + polices.Count);
+            Console.WriteLine("Antal medborgare: " + citizens.Count);
+
         }
     }
 }
