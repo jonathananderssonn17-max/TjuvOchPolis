@@ -15,6 +15,11 @@ namespace TjuvOchPolis
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
 
+        //public void Move()
+        //{
+        //    X += Xdirection;
+        //    Y += Ydirection;
+        //}
         public Person(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color)
         {
             Name = name;

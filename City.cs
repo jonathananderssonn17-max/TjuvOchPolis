@@ -63,7 +63,133 @@ namespace TjuvOchPolis
                 }
                 Console.WriteLine();
             }
+        }
 
+        public static void MovePeople(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
+        {
+            foreach (Thief thief in thiefs)
+            {
+                thief.X += thief.Xdirection;
+                thief.Y += thief.Ydirection;
+
+                if (thief.X > 99)
+                {
+                    thief.X = 1;
+                }
+
+                else if (thief.X < 1)
+                {
+                    thief.X = 99;
+                }
+
+                if (thief.Y > 24)
+                {
+                    thief.Y = 1;
+                }
+
+                else if (thief.Y < 1)
+                {
+                    thief.Y = 24;
+                }
+            }
+
+            foreach (Police police in polices)
+            {
+                police.X += police.Xdirection;
+                police.Y += police.Ydirection;
+
+                if (police.X > 99)
+                {
+                    police.X = 1;
+                }
+
+                else if (police.X < 1)
+                {
+                    police.X = 99;
+                }
+
+                if (police.Y > 24)
+                {
+                    police.Y = 1;
+                }
+
+                else if (police.Y < 1)
+                {
+                    police.Y = 24;
+                }
+            }
+
+            foreach (Citizen citizen in citizens)
+            {
+                citizen.X += citizen.Xdirection;
+                citizen.Y += citizen.Ydirection;
+
+                if (citizen.X > 99)
+                {
+                    citizen.X = 1;
+                }
+
+                else if (citizen.X < 1)
+                {
+                    citizen.X = 99;
+                }
+
+                if (citizen.Y > 24)
+                {
+                    citizen.Y = 1;
+                }
+
+                else if (citizen.Y < 1)
+                {
+                    citizen.Y = 24;
+                }
+            }
+        }
+
+        public static void CheckMeetings(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
+        {
+            foreach (Thief thief in thiefs)
+            {
+                foreach (Citizen citizen in citizens)
+                {
+                    if (thief.X == citizen.X && thief.Y == citizen.Y)
+                    {
+                        Console.WriteLine(thief.Name + " rånar medborgaren " + citizen.Name + "!");
+                        Console.ReadKey();
+                    }
+                }
+            }
+
+            foreach (Police police in polices)
+            {
+                foreach (Thief thief in thiefs)
+                {
+                    if (police.X == thief.X && police.Y == thief.Y)
+                    {
+                        Console.WriteLine(police.Name + " arresterar tjuven " + thief.Name + "!");
+                        Console.ReadKey();
+                    }
+                }
+            }
+
+            foreach (Citizen citizen in citizens)
+            {
+                foreach (Police police in polices)
+                {
+                    if (citizen.X == police.X && citizen.Y == police.Y)
+                    {
+                        Console.WriteLine(citizen.Name + " hälsar på polisen " + police.Name + "!");
+                        Console.ReadKey();
+                    }
+
+                    // Testa att skriva ut om personer är bredvid varandra, men inte på samma plats
+                    //else if (citizen.X - 1 == police.X && citizen.Y - 1 == police.Y || citizen.X + 1 == police.X && citizen.Y + 1 == police.Y)
+                    //{
+                    //    Console.WriteLine(citizen.Name + " hälsar på tjuven!");
+                    //    Console.ReadKey();
+                    //}
+                }
+            }
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 
 namespace TjuvOchPolis
 {
@@ -18,8 +19,20 @@ namespace TjuvOchPolis
             // metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
             Item.StoreItems(thiefs, polices, citizens);
 
-            // metod för att rita staden med tjuvar, poliser och medborgare
-            City.DrawCity(thiefs, polices, citizens);
+            while (true)
+            {
+                // metod för att rita staden med tjuvar, poliser och medborgare
+                City.DrawCity(thiefs, polices, citizens);
+
+                // metod för att röra på personerna
+                City.MovePeople(thiefs, polices, citizens);
+
+                // metod för att stöta på en annan person
+                City.CheckMeetings(thiefs, polices, citizens);
+
+                Thread.Sleep(300);
+                Console.Clear();
+            }
         }
     }
 }
