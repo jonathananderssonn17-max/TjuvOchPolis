@@ -21,22 +21,34 @@ namespace TjuvOchPolis
 
             while (true)
             {
-                // metod för att rita staden med tjuvar, poliser och medborgare
+                // metod för att röra på poliserna (polisen går ett extra steg)
+                City.MovePolice(polices);
+
+                City.CheckMeetings(thiefs, polices, citizens);
+                Console.Clear();
+
                 City.DrawCity(thiefs, polices, citizens);
+
+                City.ShowStatus(polices, citizens, thiefs);
+
+                Thread.Sleep(1000);
+
+
 
                 // metod för att röra på personerna
                 City.MovePeople(thiefs, polices, citizens);
 
                 // metod för att stöta på en annan person
                 City.CheckMeetings(thiefs, polices, citizens);
-                Thread.Sleep(1000);
                 Console.Clear();
+
+                // metod för att rita staden med tjuvar, poliser och medborgare
+                City.DrawCity(thiefs, polices, citizens);
+
                 City.ShowStatus(polices, citizens, thiefs);
 
-               
-
+                Thread.Sleep(1000);
             }
-
         }
     }
 }

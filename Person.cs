@@ -112,10 +112,10 @@ namespace TjuvOchPolis
 
         public Citizen(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color) : base(name, x, y, xdirection, ydirection, symbol, color)
         {
-            Tillhörigheter.Add(new Item("keys"));
-            Tillhörigheter.Add(new Item("wallet"));
-            Tillhörigheter.Add(new Item("mobile"));
-            Tillhörigheter.Add(new Item("watch"));
+            Tillhörigheter.Add(new Item("nycklar"));
+            Tillhörigheter.Add(new Item("plånbok"));
+            Tillhörigheter.Add(new Item("mobil"));
+            Tillhörigheter.Add(new Item("klocka"));
         }
     } 
 }
