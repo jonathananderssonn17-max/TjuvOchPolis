@@ -146,7 +146,7 @@ namespace TjuvOchPolis
                 }
             }
         }
-
+        public static int count = 0;
         public static void CheckMeetings(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
         {
             foreach (Thief thief in thiefs)
@@ -155,20 +155,49 @@ namespace TjuvOchPolis
                 {
                     if (thief.X == citizen.X && thief.Y == citizen.Y)
                     {
-                        Console.WriteLine(thief.Name + " rånar medborgaren " + citizen.Name + "!");
+                        if(citizen.Tillhörigheter.Count > 0)
+                        {
+                            Item stolenItem = citizen.Tillhörigheter[0];
+                            citizen.Tillhörigheter.RemoveAt(0);
+                            thief.Stöldgods.Add(stolenItem);
+                            Console.WriteLine(thief.Name + " stjäl " + stolenItem.Name + " från medborgaren " + citizen.Name + "!");
+                        }
+                        else
+                        {
+                            Console.WriteLine(thief.Name + " försöker råna medborgaren " + citizen.Name + ", men det finns inget att stjäla!");
+                        }
+                        
                         Console.ReadKey();
                     }
                 }
             }
-
+            
             foreach (Police police in polices)
             {
-                foreach (Thief thief in thiefs)
+                for (int i = 0; i < thiefs.Count; i++)
                 {
-                    if (police.X == thief.X && police.Y == thief.Y)
+                    if (police.X == thiefs[i].X && police.Y == thiefs[i].Y)
                     {
-                        Console.WriteLine(police.Name + " arresterar tjuven " + thief.Name + "!");
+                        if(thiefs[i].Stöldgods.Count > 0)
+                        {
+                            
+                            foreach (Item item in thiefs[i].Stöldgods)
+                            {
+                               
+                                police.Beslagtaget.Add(item);
+                            }
+                            thiefs[i].Stöldgods.Clear();
+
+                            Console.WriteLine(police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");                            
+                            thiefs.RemoveAt(i);
+                            count++;
+                        }
+                        else
+                        {
+                            Console.WriteLine(police.Name + " stöter på tjuven " + thiefs[i].Name + ", men det finns inget stöldgods så inget brott har begåtts!");
+                        }
                         Console.ReadKey();
+                        
                     }
                 }
             }
@@ -199,6 +228,8 @@ namespace TjuvOchPolis
             Console.WriteLine("Antal tjuvar: " + thiefs.Count);
             Console.WriteLine("Antal polisar: " + polices.Count);
             Console.WriteLine("Antal medborgare: " + citizens.Count);
+            Console.WriteLine("Antal arresterade tjuvar: " + count);
+             
 
         }
     }

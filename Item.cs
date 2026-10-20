@@ -9,10 +9,10 @@ namespace TjuvOchPolis
         public string Name { get; set; }
         public Item (string name) {  Name = name;}
 
-        public List<string> Beslagtaget { get; set; }
+        public List<Item> Beslagtaget { get; set; }
 
-        public List<string> Stöldgods { get; set; }
-        public List<string> Tillhörigheter { get; set; }
+        public List<Item> Stöldgods { get; set; }
+        public List<Item> Tillhörigheter { get; set; }
 
 
         // Metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
