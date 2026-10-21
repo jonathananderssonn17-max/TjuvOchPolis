@@ -18,7 +18,6 @@ namespace TjuvOchPolis
         // Metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
         public static void StoreItems(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
         {
-
             Console.WriteLine("Tjuvar: ");
 
             foreach (Thief thief in thiefs)

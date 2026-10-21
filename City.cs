@@ -8,6 +8,7 @@ namespace TjuvOchPolis
 {
     internal class City
     {
+        public static int counter = 0;
         public static void DrawCity(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
         {
 
@@ -193,8 +194,9 @@ namespace TjuvOchPolis
                             Item stolenItem = citizen.Tillhörigheter[rnd];
                             citizen.Tillhörigheter.RemoveAt(rnd);
 
+                            counter++;
                             thief.Stöldgods.Add(stolenItem);
-                            info.Enqueue(thief.Name + " stjäl " + stolenItem.Name + " från medborgaren " + citizen.Name + "!");
+                            info.Enqueue(counter + ": " + thief.Name + " stjäl " + stolenItem.Name + " från medborgaren " + citizen.Name + "!");
 
                             // För att se om listan fungerar korrekt.
                             //Console.WriteLine("Antal stöldgods hos tjuven: " + thief.Stöldgods.Count);
@@ -203,44 +205,9 @@ namespace TjuvOchPolis
 
                         else
                         {
-                            info.Enqueue(thief.Name + " försöker råna medborgaren " + citizen.Name + ", men det finns inget att stjäla!");
-                           
+                            counter++;
+                            info.Enqueue(counter + ": " + thief.Name + " försöker råna medborgaren " + citizen.Name + ", men det finns inget att stjäla!");
                         }
-                        
-                        
-                    }
-                }
-            }
-            foreach (Police police in polices)
-            {
-                for (int i = 0; i < thiefs.Count; i++)
-                {
-                    if (police.X == thiefs[i].X && police.Y == thiefs[i].Y)
-                    {
-                        if(thiefs[i].Stöldgods.Count > 0)
-                        {                        
-                            foreach (Item item in thiefs[i].Stöldgods)
-                            {
-                                police.Beslagtaget.Add(item);
-                            }
-                            thiefs[i].Stöldgods.Clear();
-
-                            info.Enqueue(police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");                            
-                            arrestedThiefs.Enqueue(thiefs[i]);
-                            thiefs.RemoveAt(i);
-
-                            countArrest++;
-
-                            //För att se om listan fungerar korrekt.
-                            //Console.WriteLine("Antal beslagtagna saker: " + police.Beslagtaget.Count);
-                            countBeslagtaget += police.Beslagtaget.Count;
-                            countStolen -= police.Beslagtaget.Count;
-                        }
-                        else
-                        {
-                            info.Enqueue(police.Name + " stöter på tjuven " + thiefs[i].Name + ", men det finns inget stöldgods så inget brott har begåtts!");
-                        }
-                                             
                     }
                 }
             }
@@ -251,7 +218,8 @@ namespace TjuvOchPolis
                 {
                     if (citizen.X == police.X && citizen.Y == police.Y)
                     {
-                        info.Enqueue(citizen.Name + " hälsar på polisen " + police.Name + "!");
+                        counter++;
+                        info.Enqueue(counter + ": " +citizen.Name + " hälsar på polisen " + police.Name + "!");
                     }
                 }
             }
@@ -272,7 +240,8 @@ namespace TjuvOchPolis
                             }
                             thiefs[i].Stöldgods.Clear();
 
-                            info.Enqueue(police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
+                            counter++;
+                            info.Enqueue(counter + ": " +police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
                            
                             arrestedThiefs.Enqueue(thiefs[i]);
                             thiefs.RemoveAt(i);
@@ -284,40 +253,39 @@ namespace TjuvOchPolis
 
                         else
                         {
-                            info.Enqueue(police.Name + " stöter på tjuven " + thiefs[i].Name + ", men det finns inget stöldgods så inget brott har begåtts!");
-                            
+                            counter++;
+                            info.Enqueue(counter + ": " + police.Name + " stöter på tjuven " + thiefs[i].Name + ", men det finns inget stöldgods så inget brott har begåtts!");
                         }
-                        
                     }
                 }
             }
         }
+
         public static void ShowStatus(List<Police> polices, List<Citizen> citizens, List< Thief> thiefs, Queue<Thief> arrestedThiefs, Queue<string> info)
         {
             Console.WriteLine("=STATUS=============================================================================================");
             Console.WriteLine($"Av {thiefs.Count + arrestedThiefs.Count} tjuvar är det nu {thiefs.Count} tjuvar kvar.");
             Console.WriteLine($"Av {citizens.Count} medborgare är det nu {citizens.Count} kvar.");
             Console.WriteLine($"Det finns {polices.Count} poliser i staden.");
+            Console.WriteLine("Antal arresterade tjuvar: " + countArrest);
+            Console.WriteLine("Antal beslagtagna saker: " + countBeslagtaget);
+            Console.WriteLine("Antal stöldgods: " + countStolen);
             Console.WriteLine("=NEWS FEED==========================================================================================");
             
-            if (info.Count > 10)
+            while (info.Count > 10)
             {
                 info.Dequeue();
             }
-            int count = 0;
+
             foreach (string news in info)
             {
-                count++;
-                Console.WriteLine(count + ":" + news);
+                Console.WriteLine(news);
             }
-            //Console.WriteLine("Antal arresterade tjuvar: " + countArrest);
-            //Console.WriteLine("Antal beslagtagna saker: " + countBeslagtaget);
-            //Console.WriteLine("Antal stöldgods: " + countStolen);
+
             Console.WriteLine("=ARRESTLISTA========================================================================================");
             foreach (Thief arrestedThief in arrestedThiefs)
             {
                 Console.WriteLine("Arresterade tjuvar: " + arrestedThief.Name);
-
             }
         }
     }

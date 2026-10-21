@@ -18,36 +18,53 @@ namespace TjuvOchPolis
             // metod för att skapa tjuvar, poliser och medborgare
             Person.CreatePeople(thiefs, polices, citizens);
 
-            // metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
-            Item.StoreItems(thiefs, polices, citizens);
+          
 
             while (true)
             {
-                // metod för att röra på poliserna (polisen går ett extra steg)
-                City.MovePolice(polices);
+                var key = new ConsoleKeyInfo();
+                if (Console.KeyAvailable) // Non-blocking peek
+                {
+                    // vi måste på något sätt göra så att programmet förstår vilken tangent som trycks ned. Ska göra här
 
-                City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
-                Console.Clear();
+                    switch (key.KeyChar)
+                    {
+                        case 'v':
+                        // metod för att röra på poliserna (polisen går ett extra steg)
+                        City.MovePolice(polices);
 
-                City.DrawCity(thiefs, polices, citizens);
+                        City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
+                        Console.Clear();
 
-                City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+                        City.DrawCity(thiefs, polices, citizens);
 
-                Thread.Sleep(1000);
+                        City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+
+                        Thread.Sleep(500);
 
 
+                        // metod för att röra på personerna
+                        City.MovePeople(thiefs, polices, citizens);
 
-                // metod för att röra på personerna
-                City.MovePeople(thiefs, polices, citizens);
-                // metod för att stöta på en annan person
-                City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info);
-                Console.Clear();
-                // metod för att rita staden med tjuvar, poliser och medborgare
-                City.DrawCity(thiefs, polices, citizens);
+                        City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
 
-                City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+                        // metod för att stöta på en annan person
+                        City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info);
+                        Console.Clear();
+                        // metod för att rita staden med tjuvar, poliser och medborgare
+                        City.DrawCity(thiefs, polices, citizens);
 
-                Thread.Sleep(1000);
+                        City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+
+                        Thread.Sleep(500);
+                            break;
+
+                        case 'q':
+                            // metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
+                            Item.StoreItems(thiefs, polices, citizens);
+                            break;
+                    }
+                }           
             }
         }
     }
