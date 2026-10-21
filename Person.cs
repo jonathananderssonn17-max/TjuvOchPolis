@@ -49,7 +49,7 @@ namespace TjuvOchPolis
             "Aria", "Luna", "Aurora"
             };
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 25; i++)
             {
                 int x = Random.Shared.Next(1, 99);
                 int y = Random.Shared.Next(1, 24);
@@ -61,7 +61,7 @@ namespace TjuvOchPolis
                 thiefs.Add(name);
             }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 20; i++)
             {
                 int x = Random.Shared.Next(1, 99);
                 int y = Random.Shared.Next(1, 24);
@@ -73,7 +73,7 @@ namespace TjuvOchPolis
                 polices.Add(name);
             }
 
-            for (int i = 0; i < 20; i++)
+            for (int i = 0; i < 30; i++)
             {
                 int x = Random.Shared.Next(1, 99);
                 int y = Random.Shared.Next(1, 24);
