@@ -33,21 +33,8 @@ namespace TjuvOchPolis
         }
 
         // skapar personerna och dess värden och lägger till dem i listorna
-        public static void CreatePeople(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
+        public static void CreatePeople(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens, string[] names)
         {
-            string[] names =
-            {
-            "John", "Jane", "Joe",
-            "Alice", "Bob", "Charlie",
-            "Anna", "David", "Eve",
-            "Sofia", "Grace", "Henry",
-            "Liam", "Olivia", "Noah",
-            "Emma", "Ava", "Isabella",
-            "Mia", "Charlotte", "Amelia",
-            "Harper", "Evelyn", "Abigail",
-            "Ella", "Scarlett", "Victoria",
-            "Aria", "Luna", "Aurora"
-            };
 
             for (int i = 0; i < 25; i++)
             {
@@ -84,6 +71,42 @@ namespace TjuvOchPolis
                 Citizen name = new Citizen(names[rnd], x, y, xDir, yDir, 'C', ConsoleColor.Green);
                 citizens.Add(name);
             }
+        }
+
+        public static void AddThief(List<Thief> thiefs, string[] names)
+        {
+            int x = Random.Shared.Next(1, 99);
+            int y = Random.Shared.Next(1, 24);
+            int xDir = Random.Shared.Next(-1, 2);
+            int yDir = Random.Shared.Next(-1, 2);
+            int rnd = Random.Shared.Next(0, names.Length);
+
+            Thief name = new Thief(names[rnd], x, y, xDir, yDir, 'T', ConsoleColor.Red);
+            thiefs.Add(name);
+        }
+
+        public static void AddPolice(List<Police> polices, string[] names)
+        {
+            int x = Random.Shared.Next(1, 99);
+            int y = Random.Shared.Next(1, 24);
+            int xDir = Random.Shared.Next(-1, 2);
+            int yDir = Random.Shared.Next(-1, 2);
+            int rnd = Random.Shared.Next(0, names.Length);
+
+            Police name = new Police(names[rnd], x, y, xDir, yDir, 'P', ConsoleColor.Blue);
+            polices.Add(name);
+        }
+
+        public static void AddCitizen(List<Citizen> citizens, string[] names)
+        {
+            int x = Random.Shared.Next(1, 99);
+            int y = Random.Shared.Next(1, 24);
+            int xDir = Random.Shared.Next(-1, 2);
+            int yDir = Random.Shared.Next(-1, 2);
+            int rnd = Random.Shared.Next(0, names.Length);
+
+            Citizen name = new Citizen(names[rnd], x, y, xDir, yDir, 'C', ConsoleColor.Green);
+            citizens.Add(name);
         }
     }
 
