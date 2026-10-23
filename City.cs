@@ -241,7 +241,7 @@ namespace TjuvOchPolis
                             thiefs[i].Stöldgods.Clear();
 
                             counter++;
-                            info.Enqueue(counter + ": " +police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
+                            info.Enqueue(counter + ": " + police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
                            
                             arrestedThiefs.Enqueue(thiefs[i]);
                             thiefs.RemoveAt(i);
@@ -272,7 +272,7 @@ namespace TjuvOchPolis
             Console.WriteLine("Antal stöldgods: " + countStolen);
             Console.WriteLine("=NEWS FEED==========================================================================================");
             
-            while (info.Count > 10)
+            while (info.Count > 5)
             {
                 info.Dequeue();
             }

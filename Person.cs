@@ -15,11 +15,6 @@ namespace TjuvOchPolis
         public char Symbol { get; set; }
         public ConsoleColor Color { get; set; }
 
-        //public void Move()
-        //{
-        //    X += Xdirection;
-        //    Y += Ydirection;
-        //}
         public Person(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color)
         {
             Name = name;
@@ -73,7 +68,7 @@ namespace TjuvOchPolis
             }
         }
 
-        public static void AddThief(List<Thief> thiefs, string[] names)
+        public static void AddThief(List<Thief> thiefs, string[] names, Queue<string> info)
         {
             int x = Random.Shared.Next(1, 99);
             int y = Random.Shared.Next(1, 24);
@@ -81,11 +76,14 @@ namespace TjuvOchPolis
             int yDir = Random.Shared.Next(-1, 2);
             int rnd = Random.Shared.Next(0, names.Length);
 
-            Thief name = new Thief(names[rnd], x, y, xDir, yDir, 'T', ConsoleColor.Red);
-            thiefs.Add(name);
+            Thief thief = new Thief(names[rnd], x, y, xDir, yDir, 'T', ConsoleColor.Red);
+            thiefs.Add(thief);
+
+            City.counter++;
+            info.Enqueue(City.counter + ": Tjuven " + thief.Name + " flyttade in i staden!");
         }
 
-        public static void AddPolice(List<Police> polices, string[] names)
+        public static void AddPolice(List<Police> polices, string[] names, Queue<string> info)
         {
             int x = Random.Shared.Next(1, 99);
             int y = Random.Shared.Next(1, 24);
@@ -93,11 +91,14 @@ namespace TjuvOchPolis
             int yDir = Random.Shared.Next(-1, 2);
             int rnd = Random.Shared.Next(0, names.Length);
 
-            Police name = new Police(names[rnd], x, y, xDir, yDir, 'P', ConsoleColor.Blue);
-            polices.Add(name);
+            Police police = new Police(names[rnd], x, y, xDir, yDir, 'P', ConsoleColor.Blue);
+            polices.Add(police);
+
+            City.counter++;
+            info.Enqueue(City.counter + ": Polisen " + police.Name + " flyttade in i staden!");
         }
 
-        public static void AddCitizen(List<Citizen> citizens, string[] names)
+        public static void AddCitizen(List<Citizen> citizens, string[] names, Queue<string> info)
         {
             int x = Random.Shared.Next(1, 99);
             int y = Random.Shared.Next(1, 24);
@@ -105,8 +106,11 @@ namespace TjuvOchPolis
             int yDir = Random.Shared.Next(-1, 2);
             int rnd = Random.Shared.Next(0, names.Length);
 
-            Citizen name = new Citizen(names[rnd], x, y, xDir, yDir, 'C', ConsoleColor.Green);
-            citizens.Add(name);
+            Citizen citizen = new Citizen(names[rnd], x, y, xDir, yDir, 'C', ConsoleColor.Green);
+            citizens.Add(citizen);
+
+            City.counter++;
+            info.Enqueue(City.counter + ": Medborgaren " + citizen.Name + " flyttade in i staden!");
         }
     }
 

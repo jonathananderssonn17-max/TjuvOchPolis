@@ -32,24 +32,31 @@ namespace TjuvOchPolis
             // metod för att skapa tjuvar, poliser och medborgare
             Person.CreatePeople(thiefs, polices, citizens, names);
 
+            bool runningCity = true;
+            bool runningText = true;
+
             while (true)
             {
-                while (!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.V)) // loopen körs tills man trycker på v
+                while (runningCity) // loopen körs tills man trycker på v
                 {
                     if (Console.KeyAvailable)
                     {
                         ConsoleKey key = Console.ReadKey(true).Key;
 
-                        switch (key) // fungerar, men måste dubbelklicka
+                        switch (key) 
                         {
                             case ConsoleKey.P:
-                                Person.AddPolice(polices, names);
+                                Person.AddPolice(polices, names, info);
                                 break;
                             case ConsoleKey.T:
-                                Person.AddThief(thiefs, names);
+                                Person.AddThief(thiefs, names, info);
                                 break;
                             case ConsoleKey.M:
-                                Person.AddCitizen(citizens, names);
+                                Person.AddCitizen(citizens, names, info);
+                                break;
+                            case ConsoleKey.V:
+                                runningCity = false;
+                                runningText = true;
                                 break;
                         }
                     }
@@ -83,7 +90,7 @@ namespace TjuvOchPolis
                     Thread.Sleep(500);
                 }
 
-                while(!(Console.KeyAvailable && Console.ReadKey(true).Key == ConsoleKey.V)) // loopen körs tills man trycker på v
+                while(runningText) // loopen körs tills man trycker på v
                 {
                     if (Console.KeyAvailable)
                     {
@@ -92,13 +99,17 @@ namespace TjuvOchPolis
                         switch (key)
                         {
                             case ConsoleKey.P:
-                                Person.AddPolice(polices, names);
+                                Person.AddPolice(polices, names, info);
                                 break;
                             case ConsoleKey.T:
-                                Person.AddThief(thiefs, names);
+                                Person.AddThief(thiefs, names, info);
                                 break;
                             case ConsoleKey.M:
-                                Person.AddCitizen(citizens, names);
+                                Person.AddCitizen(citizens, names, info);
+                                break;
+                            case ConsoleKey.V:
+                                runningText = false;
+                                runningCity = true;
                                 break;
                         }
                     }
