@@ -28,6 +28,7 @@ namespace TjuvOchPolis
             List<Citizen> citizens = new List<Citizen>();
             Queue<Thief> arrestedThiefs = new Queue<Thief>();
             Queue<string> info = new Queue<string>();
+            Prison prison = new Prison(arrestedThiefs, 0, 0, new char[10, 10]);
 
             // metod för att skapa tjuvar, poliser och medborgare
             Person.CreatePeople(thiefs, polices, citizens, names);
@@ -39,6 +40,7 @@ namespace TjuvOchPolis
             {
                 while (runningCity) // loopen körs tills man trycker på v
                 {
+                    
                     if (Console.KeyAvailable)
                     {
                         ConsoleKey key = Console.ReadKey(true).Key;
@@ -59,6 +61,7 @@ namespace TjuvOchPolis
                                 runningText = true;
                                 break;
                         }
+
                     }
 
                     // metod för att röra på poliserna (polisen går ett extra steg)
@@ -68,6 +71,8 @@ namespace TjuvOchPolis
                     Console.Clear();
 
                     City.DrawCity(thiefs, polices, citizens);
+
+                    prison.DrawPrison();
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
                     Thread.Sleep(500);
@@ -84,6 +89,8 @@ namespace TjuvOchPolis
 
                     // metod för att rita staden med tjuvar, poliser och medborgare
                     City.DrawCity(thiefs, polices, citizens);
+
+                    prison.DrawPrison();
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
 
@@ -133,6 +140,7 @@ namespace TjuvOchPolis
 
                     Thread.Sleep(1000);
                     Console.Clear();
+                    
                 }
             }           
         }

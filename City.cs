@@ -8,6 +8,7 @@ namespace TjuvOchPolis
 {
     internal class City
     {
+        
         public static int counter = 0;
         public static void DrawCity(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens)
         {
