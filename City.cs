@@ -181,7 +181,7 @@ namespace TjuvOchPolis
             }
         }
 
-        public static void CheckMeetings(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens, Queue<Thief> arrestedThiefs, Queue<string> info)
+        public static void CheckMeetings(List<Thief> thiefs, List<Police> polices, List<Citizen> citizens, List<Thief> arrestedThiefs, Queue<string> info)
         {
             foreach (Thief thief in thiefs)
             {
@@ -225,7 +225,7 @@ namespace TjuvOchPolis
                 }
             }
         }
-        public static void CheckPoliceMeetings(List<Police> polices, List<Thief> thiefs, Queue<Thief> arrestedThiefs, Queue<string> info)
+        public static void CheckPoliceMeetings(List<Police> polices, List<Thief> thiefs, List<Thief> arrestedThiefs, Queue<string> info)
         {
             foreach (Police police in polices)
             {
@@ -235,16 +235,18 @@ namespace TjuvOchPolis
                     {
                         if (thiefs[i].Stöldgods.Count > 0)
                         {
+                            int prisonTime = thiefs[i].Stöldgods.Count * 10;
+                            thiefs[i].ReleaseTime = DateTime.Now.AddSeconds(prisonTime);
                             foreach (Item item in thiefs[i].Stöldgods)
                             {
                                 police.Beslagtaget.Add(item);
                             }
-                            thiefs[i].Stöldgods.Clear();
-
+                             thiefs[i].Stöldgods.Clear();
+                           
                             counter++;
                             info.Enqueue(counter + ": " + police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
                            
-                            arrestedThiefs.Enqueue(thiefs[i]);
+                            arrestedThiefs.Add(thiefs[i]);
                             thiefs.RemoveAt(i);
 
                             countArrest++;             
@@ -262,7 +264,7 @@ namespace TjuvOchPolis
             }
         }
 
-        public static void ShowStatus(List<Police> polices, List<Citizen> citizens, List< Thief> thiefs, Queue<Thief> arrestedThiefs, Queue<string> info)
+        public static void ShowStatus(List<Police> polices, List<Citizen> citizens, List< Thief> thiefs, List<Thief> arrestedThiefs, Queue<string> info)
         {
             Console.WriteLine("=STATUS=============================================================================================");
             Console.WriteLine($"Av {thiefs.Count + arrestedThiefs.Count} tjuvar är det nu {thiefs.Count} tjuvar kvar.");

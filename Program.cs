@@ -26,7 +26,7 @@ namespace TjuvOchPolis
             List<Thief> thiefs = new List<Thief>();
             List<Police> polices = new List<Police>();
             List<Citizen> citizens = new List<Citizen>();
-            Queue<Thief> arrestedThiefs = new Queue<Thief>();
+            List<Thief> arrestedThiefs = new List<Thief>();
             Queue<string> info = new Queue<string>();
             Prison prison = new Prison(arrestedThiefs, 0, 0, new char[10, 10]);
 
@@ -71,8 +71,9 @@ namespace TjuvOchPolis
                     Console.Clear();
 
                     City.DrawCity(thiefs, polices, citizens);
+                    Prison.MoveThiefs(arrestedThiefs);
 
-                    prison.DrawPrison();
+                    prison.DrawPrison(arrestedThiefs, thiefs);
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
                     Thread.Sleep(500);
@@ -90,7 +91,7 @@ namespace TjuvOchPolis
                     // metod för att rita staden med tjuvar, poliser och medborgare
                     City.DrawCity(thiefs, polices, citizens);
 
-                    prison.DrawPrison();
+                    prison.DrawPrison(arrestedThiefs, thiefs);
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
 

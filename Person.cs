@@ -117,6 +117,7 @@ namespace TjuvOchPolis
     class Thief : Person
     {
         public List<Item> Stöldgods { get; set; } = new List<Item>();
+        public DateTime ReleaseTime { get; set; } 
         public Thief(string name, int x, int y, int xdirection, int ydirection, char symbol, ConsoleColor color) : base(name, x, y, xdirection, ydirection, symbol, color)
         {
 
