@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 
@@ -25,9 +26,11 @@ namespace TjuvOchPolis
         {
             ArrestedThiefs = arrestedThiefs;
         }
-        public void DrawPrison(List<Thief> arrestedThiefs, List<Thief> thiefs)
+        public void DrawPrison(List<Thief> arrestedThiefs, List<Thief> thiefs, Queue<string> info)
         {
-            
+            Console.WriteLine();
+            Console.WriteLine("FÄNGELSET");
+
             for (int y = 0; y < Map.GetLength(0); y++)
             {
                 for (int x = 0; x < Map.GetLength(1); x++)
@@ -35,11 +38,9 @@ namespace TjuvOchPolis
                     char symbol = ' ';
                     ConsoleColor color = ConsoleColor.Gray;
 
-
                     if (y == 0 || y == Map.GetLength(0) - 1 || x == 0 || x == Map.GetLength(1) - 1)
                     {
-                        symbol = 'X';
-                        
+                        symbol = 'X'; 
                     }
 
                     else
@@ -59,11 +60,8 @@ namespace TjuvOchPolis
                     Console.ResetColor();
                 }
                 Console.WriteLine();
-
-         
-           
             }
-            Timer(arrestedThiefs, thiefs);
+            Timer(arrestedThiefs, thiefs, info);
         }
         public static void MoveThiefs(List<Thief> arrestedThiefs)
         {
@@ -92,27 +90,25 @@ namespace TjuvOchPolis
                     thief.Y = 9;
                 }
             }
-
         }
-        public static void Timer(List<Thief> arrestedThiefs, List<Thief> thiefs)
+        public static void Timer(List<Thief> arrestedThiefs, List<Thief> thiefs, Queue<string> info)
         {
-          
-           for (int i= 0; 0 <arrestedThiefs.Count; i++)
+           for (int i = 0; i < arrestedThiefs.Count; i++)
             {
                 if (DateTime.Now >= arrestedThiefs[i].ReleaseTime)
                 {
                     arrestedThiefs[i].X = Random.Shared.Next(1, 99);
-                    int y = Random.Shared.Next(1, 24);
-                    int xDir = Random.Shared.Next(-1, 2);
-                    int yDir = Random.Shared.Next(-1, 2);
-                    int rnd = Random.Shared.Next(0, names.Length);
+                    arrestedThiefs[i].Y = Random.Shared.Next(1, 24);
+                    arrestedThiefs[i].Xdirection = Random.Shared.Next(-1, 2);
+                    arrestedThiefs[i].Ydirection = Random.Shared.Next(-1, 2); // kodblocket ger nya kordinater åt tjuven, så att den inte hamnar på samma
+
                     thiefs.Add(arrestedThiefs[i]);
                     arrestedThiefs.RemoveAt(i);
-                }
-            }
 
-           
-           
+                    City.counter++;
+                    info.Enqueue(City.counter + ": Tjuven " + thiefs[i].Name + " har blivit släppt från fängeleset!");
+                }
+            } 
         }
     }
 }

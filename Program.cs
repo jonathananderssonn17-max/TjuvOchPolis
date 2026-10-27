@@ -61,7 +61,6 @@ namespace TjuvOchPolis
                                 runningText = true;
                                 break;
                         }
-
                     }
 
                     // metod för att röra på poliserna (polisen går ett extra steg)
@@ -73,7 +72,7 @@ namespace TjuvOchPolis
                     City.DrawCity(thiefs, polices, citizens);
                     Prison.MoveThiefs(arrestedThiefs);
 
-                    prison.DrawPrison(arrestedThiefs, thiefs);
+                    prison.DrawPrison(arrestedThiefs, thiefs, info);
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
                     Thread.Sleep(500);
@@ -91,7 +90,7 @@ namespace TjuvOchPolis
                     // metod för att rita staden med tjuvar, poliser och medborgare
                     City.DrawCity(thiefs, polices, citizens);
 
-                    prison.DrawPrison(arrestedThiefs, thiefs);
+                    prison.DrawPrison(arrestedThiefs, thiefs, info);
 
                     City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
 

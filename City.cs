@@ -16,6 +16,8 @@ namespace TjuvOchPolis
             //Ritar staden
             char[,] city = new char[25, 100];
 
+            Console.WriteLine("STADEN");
+
             for (int y = 0; y < city.GetLength(0); y++)
             {
                 for (int x = 0; x < city.GetLength(1); x++)
@@ -237,14 +239,15 @@ namespace TjuvOchPolis
                         {
                             int prisonTime = thiefs[i].Stöldgods.Count * 10;
                             thiefs[i].ReleaseTime = DateTime.Now.AddSeconds(prisonTime);
+
                             foreach (Item item in thiefs[i].Stöldgods)
                             {
                                 police.Beslagtaget.Add(item);
                             }
-                             thiefs[i].Stöldgods.Clear();
+                            thiefs[i].Stöldgods.Clear();
                            
                             counter++;
-                            info.Enqueue(counter + ": " + police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + "!");
+                            info.Enqueue(counter + ": " + police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + " och personen hamnar i fängelset!");
                            
                             arrestedThiefs.Add(thiefs[i]);
                             thiefs.RemoveAt(i);
