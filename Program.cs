@@ -27,8 +27,11 @@ namespace TjuvOchPolis
             List<Police> polices = new List<Police>();
             List<Citizen> citizens = new List<Citizen>();
             List<Thief> arrestedThiefs = new List<Thief>();
+            List<Citizen> poorCitizen = new List<Citizen>();
             Queue<string> info = new Queue<string>();
             Prison prison = new Prison(arrestedThiefs, 0, 0, new char[10, 10]);
+            PovertyHouse povertyHouse = new PovertyHouse(poorCitizen, 0, 0, new char[10, 50]);
+
 
             // metod för att skapa tjuvar, poliser och medborgare
             Person.CreatePeople(thiefs, polices, citizens, names);
@@ -40,7 +43,6 @@ namespace TjuvOchPolis
             {
                 while (runningCity) // loopen körs tills man trycker på v
                 {
-                    
                     if (Console.KeyAvailable)
                     {
                         ConsoleKey key = Console.ReadKey(true).Key;
@@ -70,11 +72,14 @@ namespace TjuvOchPolis
                     Console.Clear();
 
                     City.DrawCity(thiefs, polices, citizens);
-                    Prison.MoveThiefs(arrestedThiefs);
 
+                    Prison.MoveThiefs(arrestedThiefs);
                     prison.DrawPrison(arrestedThiefs, thiefs, info);
 
-                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+                    PovertyHouse.MovePoverty(poorCitizen);
+                    povertyHouse.DrawPoverty(poorCitizen);
+
+                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info, poorCitizen);
                     Thread.Sleep(500);
 
 
@@ -84,15 +89,19 @@ namespace TjuvOchPolis
                     City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
 
                     // metod för att stöta på en annan person
-                    City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info);
+                    City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info, poorCitizen);
                     Console.Clear();
 
                     // metod för att rita staden med tjuvar, poliser och medborgare
                     City.DrawCity(thiefs, polices, citizens);
 
+                    Prison.MoveThiefs(arrestedThiefs);
                     prison.DrawPrison(arrestedThiefs, thiefs, info);
 
-                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info);
+                    PovertyHouse.MovePoverty(poorCitizen);
+                    povertyHouse.DrawPoverty(poorCitizen);
+
+                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info, poorCitizen);
 
                     Thread.Sleep(500);
                 }
@@ -125,22 +134,34 @@ namespace TjuvOchPolis
 
                     City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
 
+                    Prison.MoveThiefs(arrestedThiefs);
+
+                    PovertyHouse.MovePoverty(poorCitizen);
+
                     // metod för att lagra stöldgods, beslagtaget och tillhörigheter för tjuvar, poliser och medborgare
                     Item.StoreItems(thiefs, polices, citizens);
+
+                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info, poorCitizen);
                     Thread.Sleep(1000);
                     Console.Clear();
+
 
                     City.MovePeople(thiefs, polices, citizens);
 
                     City.CheckPoliceMeetings(polices, thiefs, arrestedThiefs, info);
 
+                    Prison.MoveThiefs(arrestedThiefs);
+
+                    PovertyHouse.MovePoverty(poorCitizen);
+
                     // metod för att stöta på en annan person
-                    City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info);
+                    City.CheckMeetings(thiefs, polices, citizens, arrestedThiefs, info, poorCitizen);
+
                     Item.StoreItems(thiefs, polices, citizens);
 
+                    City.ShowStatus(polices, citizens, thiefs, arrestedThiefs, info, poorCitizen);
                     Thread.Sleep(1000);
                     Console.Clear();
-                    
                 }
             }           
         }

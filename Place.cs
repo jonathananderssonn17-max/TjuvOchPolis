@@ -111,5 +111,79 @@ namespace TjuvOchPolis
             } 
         }
     }
+
+    class PovertyHouse : Place
+    {
+        public PovertyHouse(List<Citizen> citizens, int x, int y, char[,] map) : base(x, y, map)
+        {
+            
+        }
+
+        public void DrawPoverty(List<Citizen> poorCitizen)
+        {
+            Console.WriteLine();
+            Console.WriteLine("FATTIGHUSET");
+
+            for (int y = 0; y < Map.GetLength(0); y++)
+            {
+                for (int x = 0; x < Map.GetLength(1); x++)
+                {
+                    char symbol = ' ';
+                    ConsoleColor color = ConsoleColor.Gray;
+
+                    if (y == 0 || y == Map.GetLength(0) - 1 || x == 0 || x == Map.GetLength(1) - 1)
+                    {
+                        symbol = 'X';
+                    }
+
+                    else
+                    {
+                        foreach (Citizen citizen in poorCitizen)
+                        {
+                            if (citizen.X == x && citizen.Y == y)
+                            {
+                                symbol = citizen.Symbol;
+                                color = citizen.Color;
+                            }
+                        }
+                    }
+                    Map[y, x] = symbol;
+                    Console.ForegroundColor = color;
+                    Console.Write(Map[y, x]);
+                    Console.ResetColor();
+                }
+                Console.WriteLine();
+            }
+        }
+
+        public static void MovePoverty(List<Citizen> poorCitizen)
+        {
+            foreach (Citizen citizen in poorCitizen)
+            {
+                citizen.X += citizen.Xdirection;
+                citizen.Y += citizen.Ydirection;
+
+                if (citizen.X > 49)
+                {
+                    citizen.X = 1;
+                }
+
+                else if (citizen.X < 1)
+                {
+                    citizen.X = 49;
+                }
+
+                if (citizen.Y > 9)
+                {
+                    citizen.Y = 1;
+                }
+
+                else if (citizen.Y < 1)
+                {
+                    citizen.Y = 9;
+                }
+            }
+        }
+    }
 }
 
