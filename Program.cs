@@ -10,7 +10,7 @@ namespace TjuvOchPolis
         static void Main(string[] args)
         {
             string[] names =
-{
+            {
             "John", "Jane", "Joe",
             "Alice", "Bob", "Charlie",
             "Anna", "David", "Eve",
