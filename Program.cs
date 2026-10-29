@@ -83,6 +83,28 @@ namespace TjuvOchPolis
                     Thread.Sleep(500);
 
 
+                    if (Console.KeyAvailable)
+                    {
+                        ConsoleKey key = Console.ReadKey(true).Key;
+
+                        switch (key)
+                        {
+                            case ConsoleKey.P:
+                                Person.AddPolice(polices, names, info);
+                                break;
+                            case ConsoleKey.T:
+                                Person.AddThief(thiefs, names, info);
+                                break;
+                            case ConsoleKey.M:
+                                Person.AddCitizen(citizens, names, info);
+                                break;
+                            case ConsoleKey.V:
+                                runningCity = false;
+                                runningText = true;
+                                break;
+                        }
+                    }
+
                     // metod för att röra på personerna
                     City.MovePeople(thiefs, polices, citizens);
 
@@ -145,6 +167,28 @@ namespace TjuvOchPolis
                     Thread.Sleep(1000);
                     Console.Clear();
 
+
+                    if (Console.KeyAvailable)
+                    {
+                        ConsoleKey key = Console.ReadKey(true).Key;
+
+                        switch (key)
+                        {
+                            case ConsoleKey.P:
+                                Person.AddPolice(polices, names, info);
+                                break;
+                            case ConsoleKey.T:
+                                Person.AddThief(thiefs, names, info);
+                                break;
+                            case ConsoleKey.M:
+                                Person.AddCitizen(citizens, names, info);
+                                break;
+                            case ConsoleKey.V:
+                                runningText = false;
+                                runningCity = true;
+                                break;
+                        }
+                    }
 
                     City.MovePeople(thiefs, polices, citizens);
 
