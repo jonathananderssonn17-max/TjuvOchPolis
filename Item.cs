@@ -58,17 +58,4 @@ namespace TjuvOchPolis
             Console.WriteLine();
         }
     }
-    class Stöldgods()
-    {
-
-    }
-    class Beslagtaget()
-    {
-
-    }
-
-    class Tillhörigheter()
-    {
-
-    }
 }
