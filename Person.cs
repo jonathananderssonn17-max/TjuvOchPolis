@@ -131,7 +131,6 @@ namespace TjuvOchPolis
         {
 
         }
-
     }
 
     class Citizen : Person

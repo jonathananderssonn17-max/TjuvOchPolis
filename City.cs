@@ -201,8 +201,6 @@ namespace TjuvOchPolis
                             thief.Stöldgods.Add(stolenItem);
                             info.Enqueue(counter + ": " + thief.Name + " stjäl " + stolenItem.Name + " från medborgaren " + citizens[i].Name + "!");
 
-                            // För att se om listan fungerar korrekt.
-                            //Console.WriteLine("Antal stöldgods hos tjuven: " + thief.Stöldgods.Count);
                             countStolen++;
 
                             if (citizens[i].Tillhörigheter.Count == 0)
@@ -213,12 +211,6 @@ namespace TjuvOchPolis
                                 citizens.RemoveAt(i);       
                             }
                         }
-
-                        //else
-                        //{
-                        //    counter++;
-                        //    info.Enqueue(counter + ": " + thief.Name + " försöker råna medborgaren " + citizen.Name + ", men det finns inget att stjäla!");
-                        //}
                     }
                 }
             }
@@ -230,7 +222,7 @@ namespace TjuvOchPolis
                     if (citizen.X == police.X && citizen.Y == police.Y)
                     {
                         counter++;
-                        info.Enqueue(counter + ": " +citizen.Name + " hälsar på polisen " + police.Name + "!");
+                        info.Enqueue(counter + ": " + citizen.Name + " hälsar på polisen " + police.Name + "!");
                     }
                 }
             }
@@ -257,9 +249,11 @@ namespace TjuvOchPolis
                            
                             counter++;
                             info.Enqueue(counter + ": " + police.Name + " beslagtar all stöldgods från tjuven och arrersterar " + thiefs[i].Name + " och personen hamnar i fängelset!");
-                           
+
                             arrestedThiefs.Add(thiefs[i]);
                             thiefs.RemoveAt(i);
+
+                            Thread.Sleep(2000); // pausar programmet när polisen tar en tjuv
 
                             countArrest++;             
                             countBeslagtaget += antalSaker;
